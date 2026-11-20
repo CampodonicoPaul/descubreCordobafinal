@@ -1,0 +1,11 @@
+HACKATHON GRUPO 9 - GUIA PARA EXPLICAR EL CODIGO
+
+FRONTEND
+1) MisPedidos.jsx: tarjetas individuales y pestañas futuras/pasadas.
+2) ReservaChat.jsx: muestra conversación y envía mensajes.
+3) Perfil.jsx: entrada al historial tras login.
+4) AdminCompras.jsx: acceso a mensajes en el panel existente.
+
+INSTALACION
+Conservar el .env original, hacer respaldo de la base y probar con una reserva de prueba.
+Estas modificaciones NO incluyen aún solicitud de cancelación ni notificaciones por email al recibir un chat.

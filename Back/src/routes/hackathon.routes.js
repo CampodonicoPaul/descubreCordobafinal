@@ -1,0 +1,11 @@
+import {Router} from 'express';
+import {verificarUsuario,verificarAdmin} from '../middleware/auth.js';
+import {verificarPermiso} from '../middleware/permisos.js';
+import {solicitar,misSolicitudes,listarSolicitudes,resolver,cancelarSalida} from '../controllers/hackathon.controller.js';
+const r=Router();
+r.post('/cliente/detalles/:idDetalle/solicitar',verificarUsuario,solicitar);
+r.get('/cliente/solicitudes',verificarUsuario,misSolicitudes);
+r.get('/admin/solicitudes',verificarAdmin,verificarPermiso('reservas.leer'),listarSolicitudes);
+r.put('/admin/solicitudes/:id',verificarAdmin,verificarPermiso('reservas.escribir'),resolver);
+r.post('/admin/salidas/:fechaId/cancelar',verificarAdmin,verificarPermiso('reservas.escribir'),cancelarSalida);
+export default r;

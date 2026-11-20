@@ -1,0 +1,38 @@
+DESCUBRE CORDOBA - GRUPO 9 - AVANCE CHAT PRIVADO
+
+CAMBIO DEMOSTRABLE
+- Cliente: Mis reservas -> cada excursión reservada tiene botón "Ver mensajes".
+- Administrador: Gestión de reservas -> abrir reserva -> sección "Chat por excursión reservada".
+- Los mensajes de cliente y administrador se guardan en MySQL y se consultan por idDetalleCompra.
+- Se respeta login/JWT y el cliente solo puede entrar a sus propias reservas.
+
+INSTALACION (HACER RESPALDOS ANTES)
+1. Guardar una copia de su backend, frontend y base de datos actuales.
+2. En MySQL Workbench, verificar el nombre de la BD y ejecutar UNA VEZ
+   backend/MIGRACION_HACKATHON_MENSAJES.sql. Si la base tiene otro nombre,
+   corregir el USE antes de ejecutar.
+3. Reemplazar el código del proyecto por estos ZIP manteniendo su propio .env.
+   No compartir ni subir el .env, contraseñas o secretos.
+4. Backend: npm install (si falta) y npm start.
+5. Frontend: npm install (si falta) y npm run dev.
+6. Iniciar sesión como cliente con una reserva existente: Mis reservas -> Ver mensajes.
+7. Escribir y enviar un mensaje; abrir la misma compra con la cuenta admin
+   desde Gestión de reservas; elegir la excursión -> Mensajes y responder.
+8. En el cliente, presionar Actualizar para ver la respuesta. El chat no es en tiempo real.
+
+RUTAS AGREGADAS
+GET  /api/mensajes/cliente/:idDetalle
+POST /api/mensajes/cliente/:idDetalle   body: {"contenido":"Hola"}
+GET  /api/mensajes/admin/:idDetalle
+POST /api/mensajes/admin/:idDetalle     body: {"contenido":"Hola"}
+
+DER: DetalleCompra (1) -> (N) Mensaje.
+Mensaje(id, idDetalleCompra FK, emisorTipo, emisorId, contenido, fechaEnvio)
+EmisorId es referencia lógica: apunta a Usuario o UsuarioAdmin según emisorTipo.
+
+LIMITACIONES DE ESTE AVANCE
+- No se envía email cuando llega un mensaje (se agregará después con Nodemailer).
+- No tiene WebSockets, adjuntos, mensajes leídos ni notificaciones de chat.
+- Solicitudes de cancelación, reprogramación y cancelación masiva todavía no están programadas.
+- No se pudo probar contra su MySQL real ni hacer una prueba en navegador aquí.
+- Para escribir desde admin se requiere ADMIN o GESTOR DE RESERVAS (OPERADOR solo lectura).
